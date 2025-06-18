@@ -133,7 +133,7 @@ const generateDocs = () => {
 
   entities.forEach((entity) => {
     const tag = capitalize(entity);
-    const filePath = path.join(docsDir, `${tag}Docs.js`);
+    const filePath = path.join(docsDir, `${tag}Doc.js`);
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, generateDocsContent(entity));
       console.log(`📘 Generated: ${filePath}`);

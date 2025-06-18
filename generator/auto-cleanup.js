@@ -30,7 +30,7 @@ const destroyGeneratedFiles = () => {
     const controllerPath = path.join(__dirname, '..', 'controllers', `${className}Controller.js`);
     const modelPath = path.join(__dirname, '..', 'models', `${className}Model.js`);
     const routePath = path.join(__dirname, '..', 'routes', `${entity}Routes.js`);
-    const docPath = path.join(__dirname, '..', 'docs', `${entity}Doc.js`);
+    const docPath = path.join(__dirname, '..', 'docs', `${className}Doc.js`);
 
     deleteIfExists(controllerPath);
     deleteIfExists(modelPath);

@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "generate": "node generator/index.js",
+    "generate-clear": "node generator/auto-cleanup.js",
     "production": "NODE_ENV=production node app.js"
   },
   "keywords": [],

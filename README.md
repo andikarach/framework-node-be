@@ -1,29 +1,90 @@
-# Framwework Node
-Framework Node js for API
+# 🧠 API Generator
+
+This is an automatic generator system to speed up API development. By simply listing the entities, you can instantly generate:
+
+- Controller
+- Router
+- Model
+- API Doc
+- Index Route
+
+---
+
+## 🏗️ Struktur Utama
+
+- `/generator`
+  - `entities.json` – List Entity / Module / Menu
+  - `generate-controller.js`
+  - `generate-docs.js`
+  - `generate-routes.js`
+- `/controllers` – controller
+- `/moodels` - model
+- `/routes` – router & indexRoutes.js
+- `/docs` – dokumentasi OpenAPI per entity
+
+---
+
+## ✅ How to use
+
+### 1. Define Entity
+
+Change file `generator/entities.json`:
+
+```json
+[
+  "category",
+  "menu",
+  "product",
+  "product-detail",
+  "role"
+]
+
+```
+
+Use kebab-case for names that consist of two or more words.
+
+### 2. Run Generator
+
+npm run generator
+
+This will:
+
+- Generate controller files in the controllers/ directory
+- Generate model files in the models/ directory
+- Generate API documentation files in the docs/ directory
+- Generate API router files in the routes/ directory
+- Generate indexRoutes.js based on all router files
+
+### 3. Use indexRoutes in app.js
+const indexRoutes = require('./routes/indexRoutes');
+app.use('/api', indexRoutes);
+
+This registers all the routers and combines them in routes/indexRoutes.js.
+
+## 🔄  Add new Entity ?
+
+### 1. Add it to entities.json
+
+### 2. Re-run npm run generator
+
+### 3. Done — all necessary files will be automatically generated
 
 
-commit ed7be73808937e4ae0215ecc9d48f6adc1bdf8e7
-- BIG UPDATE, NEW FLOW CART, TRANSACTION, THERE ARE STILL LOTS OF BUGS
+## 🧹  Reset File Generator
+For each entity in entities.json, the cleanup will delete it — except for `indexRoutes`, which is generated and will not be cleaned up.
+
+controllers/<Entity>Controller.js
+models/<Entity>Models.js
+routes/<entity>Router.js
+docs/<Entity>Docs.js
+
+### 1. Jalankan Cleanup
+
+npm run generate-clear
 
 
-router.post("/management", tokenMiddleware.verifyToken, (req, res, next) => {
-    const uploadImages = upload.uploadImage('management-logos/management-logos');
-    uploadImages.single('logo')(req, res, next);
-}, ManagementController.postManagement);
+```
+WARNING !!!
 
-router.put("/business-account/:id", upload.fields([{ name: 'watermark_logo' }, { name: 'struk_logo' }, { name: 'text_logo' }]), BusinessAccountController.updateBusinessAccount);
-
-
-use :
-    const uploadImages = upload.uploadImage('management-logos/management-logos');
-    uploadImages.single('logo')(req, res, next);
-
-or 
-
-router.post("/property", tokenMiddleware.verifyToken, 
-  upload.uploadMultipleImageFields([
-    { name: 'thumbnail', prefix: 'property-thumbnails' },
-    { name: 'icon', prefix: 'property-icons' }
-  ]),
-  PropertyController.postProperty
-);
+Please do not push the generated files back to the origin repository after using them in your project.
+```
